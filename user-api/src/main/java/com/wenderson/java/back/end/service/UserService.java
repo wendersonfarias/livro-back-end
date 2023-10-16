@@ -19,7 +19,7 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	List<UserDTO> getAll(){
+	public List<UserDTO> getAll(){
 		List<User> listUser= userRepository.findAll();
 		List<UserDTO> listUserDTO= new ArrayList<UserDTO>();
 		
@@ -29,14 +29,14 @@ public class UserService {
 		return listUserDTO;
 	}
 	
-	UserDTO findById(Long id) {
+	public UserDTO findById(Long id) {
 		User user = userRepository.findById(id).orElseThrow(() -> 
 							new RuntimeException("Usuario nao encontrado"));
 		
 		return UserDTO.convert(user);
 	}
 	
-	UserDTO findByCpf(String cpf) {
+	public UserDTO findByCpf(String cpf) {
 		User user = userRepository.findByCpf(cpf).orElseThrow(() -> 
 							new RuntimeException("Usuario nao encontrado"));
 
