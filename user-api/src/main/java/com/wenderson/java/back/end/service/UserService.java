@@ -1,5 +1,6 @@
 package com.wenderson.java.back.end.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class UserService {
 	}
 	
 	public UserDTO save(UserDTO userDTO) {
+		userDTO.setDataCadastro(LocalDateTime.now());
 		User user = User.convert(userDTO);
 		return UserDTO.convert(userRepository.save(user));
 	}
@@ -55,15 +57,20 @@ public class UserService {
 		return UserDTO.convert(user);
 	}
 	
-	public List<UserDTO> queryByName(String nome){
-		List<User> listUser =  userRepository.queryByNomeLike(nome);
-		List<UserDTO> listUserDTO = new ArrayList<UserDTO>();
-		
-		for (User user : listUser) {
-			listUserDTO.add(UserDTO.convert(user));
-		}
-		
-		return listUserDTO;
+	public List<UserDTO> queryByName(String nome) {
+	  
+	  
+	    nome = "%" + nome + "%";
+	    
+
+	    List<User> listUser = userRepository.queryByNomeLike(nome);
+	    List<UserDTO> listUserDTO = new ArrayList<>();
+
+	    for (User user : listUser) {
+	        listUserDTO.add(UserDTO.convert(user));
+	    }
+
+	    return listUserDTO;
 	}
 	
 	public UserDTO editUser(Long userId, UserDTO userDTO) {
