@@ -26,7 +26,7 @@ public class User {
 	private		String	telefone;
 	private		LocalDateTime	dataCadastro;
 	
-	public User convert(UserDTO userDTO) {
+	public static User convert(UserDTO userDTO) {
 		User user = new User();
 		user.setNome(userDTO.getNome());
 		user.setCpf(userDTO.getCpf());
